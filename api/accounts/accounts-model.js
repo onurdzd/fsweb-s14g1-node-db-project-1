@@ -12,7 +12,7 @@ const getById = id => {
 
 const create = account => {
   // KODLAR BURAYA
-  return db("accounts").insert(account)
+  return db("accounts").insert(account).then(([id]) => getById(id))
 }
 
 const updateById = (id, account) => {
