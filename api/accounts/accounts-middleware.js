@@ -8,7 +8,7 @@ exports.checkAccountPayload = (req, res, next) => {
   }else if(req.body.name.trim().length <3 || req.body.name.length >100){
     return res.status(400).json({ message: "name of account must be between 3 and 100" })
   }else if(!Number(req.body.budget) || isNaN(req.body.budget)){
-    return res.status(400).json({ message: "budget of account must be a number" })
+    return res.status(400).json({ message: "budget of account must be a number" }) //Nan da burayı pas geçiyor.pas geçmemesi lazım
   }else if(Number(req.body.budget)>1000000 || Number(req.body.budget)<0){
     return res.status(400).json({ message: "budget of account is too large or too small" })
   }else{
