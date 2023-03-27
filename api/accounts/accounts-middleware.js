@@ -1,19 +1,18 @@
 const AccModel=require("./accounts-model")
 
-exports.checkAccountPayload =async (req, res, next) => {
+exports.checkAccountPayload = (req, res, next) => {
   // KODLAR BURAYA
   // Not: Validasyon için Yup(şu an yüklü değil!) kullanabilirsiniz veya kendiniz manuel yazabilirsiniz.
-  req.body.name= await req.body.name.replace(/\s/g, "")
   if(!req.body.name || !req.body.budget){
     return res.status(400).json({ message: "name and budget are required" })
-  }else if(req.body.name.length <3 || req.body.name.length >100){
+  }else if(req.body.name.trim().length <3 || req.body.name.length >100){
     return res.status(400).json({ message: "name of account must be between 3 and 100" })
-  }else if(!Number(req.body.budget)){
+  }else if(!Number(req.body.budget) || isNaN(req.body.budget)){
     return res.status(400).json({ message: "budget of account must be a number" })
   }else if(Number(req.body.budget)>1000000 || Number(req.body.budget)<0){
     return res.status(400).json({ message: "budget of account is too large or too small" })
   }else{
-    req.accCheckedPayload={name:req.body.name, budget:req.body.budget}
+    req.accCheckedPayload={name:req.body.name.trim(), budget:req.body.budget}
     next()
   }
 }
