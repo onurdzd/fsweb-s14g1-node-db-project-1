@@ -17,7 +17,7 @@ const create = account => {
 
 const updateById = (id, account) => {
   // KODLAR BURAYA
-  return db("accounts").where('id', id).update(account)
+  return db("accounts").where('id', id).update(account) //return sonucu UPDATE OLAN SATIR SAYISNI VERİR
 }
 
 const deleteById = id => {
